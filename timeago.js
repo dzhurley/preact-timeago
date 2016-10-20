@@ -4,6 +4,9 @@ const timeago = require('timeago.js');
 class TimeAgo extends Component {
     componentWillMount() {
         this.instance = timeago();
+    }
+
+    componentDidMount() {
         this.renderTimeAgo();
     }
 
@@ -19,7 +22,7 @@ class TimeAgo extends Component {
         const { datetime, live=false } = this.props;
 
         this.instance.cancel();
-        if (live === false) return;
+        if (!this.node || (live === false)) return;
 
         this.node.setAttribute('datetime', datetime.getTime ? datetime.getTime() : datetime);
         this.instance.render(this.node);
