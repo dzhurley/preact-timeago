@@ -1,0 +1,35 @@
+{
+  "name": "preact-timeago",
+  "version": "1.0.0",
+  "description": "minimal port of timeago-react to preact",
+  "main": "timeago.build.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dzhurley/preact-timeago.git"
+  },
+  "author": "dzhurley",
+  "homepage": "https://github.com/dzhurley/preact-timeago",
+  "keywords": [
+    "preact",
+    "timeago",
+    "datetime",
+    "timestamp"
+  ],
+  "dependencies": {
+    "preact": "^6.3.0",
+    "timeago.js": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.11.4",
+    "babel-eslint": "^7.0.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "eslint": "^3.2.2",
+    "eslint-plugin-react": "^6.0.0"
+  },
+  "scripts": {
+    "build": "eslint js && babel timeago.js --out-file timeago.build.js"
+  }
+}
