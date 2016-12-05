@@ -8,10 +8,6 @@ class TimeAgo extends Component {
 
     componentDidMount() {
         this.renderTimeAgo();
-    }
-
-    componentDidUpdate() {
-        this.renderTimeAgo();
 
         // When used in combination with jsdom for headless testing, we need to ensure that
         // `dataset` exists on the node until https://github.com/tmpvar/jsdom/issues/961 is
@@ -21,6 +17,10 @@ class TimeAgo extends Component {
         if (typeof this.node.dataset == 'undefined') {
             this.node.dataset = {};
         }
+    }
+
+    componentDidUpdate() {
+        this.renderTimeAgo();
     }
 
     componentWillUnmount() {
