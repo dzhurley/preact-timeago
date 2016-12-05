@@ -12,6 +12,15 @@ class TimeAgo extends Component {
 
     componentDidUpdate() {
         this.renderTimeAgo();
+
+        // When used in combination with jsdom for headless testing, we need to ensure that
+        // `dataset` exists on the node until https://github.com/tmpvar/jsdom/issues/961 is
+        // resolved, as under the covers timeago.js checks `dataset` before `getAttribute`.
+        //
+        // TODO: pull request timeago.js to reorder checks on `getAttribute`/`dataset`.
+        if (typeof this.node.dataset == 'undefined') {
+            this.node.dataset = {};
+        }
     }
 
     componentWillUnmount() {
@@ -23,13 +32,6 @@ class TimeAgo extends Component {
 
         this.instance.cancel();
         if (!this.node || (live === false)) return;
-
-        // When used in combination with jsdom for headless testing, we need to ensure that
-        // `dataset` exists on the node until https://github.com/tmpvar/jsdom/issues/961 is
-        // resolved, as under the covers timeago.js checks `dataset` before `getAttribute`.
-        //
-        // TODO: pull request timeago.js to reorder checks on `getAttribute`/`dataset`.
-        this.node.dataset = this.node.dataset || {};
 
         this.node.setAttribute('datetime', datetime.getTime ? datetime.getTime() : datetime);
         this.instance.render(this.node);
