@@ -23,23 +23,23 @@ class TimeAgo extends Component {
 
         this.instance.cancel();
 
-        if (!this.node || (live === false)) return;
+        if (!this.base || (live === false)) return;
 
         // When used in combination with jsdom for headless testing, we need to ensure that
-        // `dataset` exists on the node until https://github.com/tmpvar/jsdom/issues/961 is
+        // `dataset` exists on the base until https://github.com/tmpvar/jsdom/issues/961 is
         // resolved, as under the covers timeago.js checks `dataset` before `getAttribute`.
         //
         // TODO: pull request timeago.js to reorder checks on `getAttribute`/`dataset`.
-        if (typeof this.node.dataset == 'undefined') {
-            this.node.dataset = {};
+        if (typeof this.base.dataset == 'undefined') {
+            this.base.dataset = {};
         }
 
-        this.node.setAttribute('datetime', datetime.getTime ? datetime.getTime() : datetime);
-        this.instance.render(this.node);
+        this.base.setAttribute('datetime', datetime.getTime ? datetime.getTime() : datetime);
+        this.instance.render(this.base);
     }
 
-    render({ datetime }) {
-        return <time ref={n => this.node = n}>{this.instance.format(datetime)}</time>;
+    render(props) {
+        return h('time', { 'class': props.class }, this.instance.format(props.datetime));
     }
 }
 
