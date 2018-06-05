@@ -15,9 +15,11 @@
     "datetime",
     "timestamp"
   ],
-  "peerDependencies": {
-    "preact": ">=6.3.0",
+  "dependencies": {
     "timeago.js": ">=2.0.3"
+  },
+  "peerDependencies": {
+    "preact": ">=6.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
